@@ -254,9 +254,7 @@ void cvicenie9::on_PridatKos_clicked()
 		else {					//ak vsetko funguje
 			int i;
 			Zakaznik.SetCart(id, Zakaznik.Cart(id) + ui.NakupKusy->value());		//prida produkty zakaznikovi do kosika
-			qDebug() << "ID:" << id;
 			MojObchod->SetListStock(id, MojObchod->GetListStock(id) - ui.NakupKusy->value());		//upravi skladove zasoby obchodu
-			//setMainTable(id);				//aktualizuje skladove zasoby
 			UpravKatalog();
 			Zakaznik.SubBudget(ui.NakupCena->value());
 
