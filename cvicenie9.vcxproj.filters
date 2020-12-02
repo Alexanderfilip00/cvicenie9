@@ -30,9 +30,6 @@
     <QtUic Include="cvicenie9.ui">
       <Filter>Resource Files</Filter>
     </QtUic>
-    <QtMoc Include="cvicenie9.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <ClCompile Include="cvicenie9.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -41,5 +38,10 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="cvicenie9.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

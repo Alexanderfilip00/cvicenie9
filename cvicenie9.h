@@ -56,6 +56,7 @@ private:
 	QVector<Product> List;
 public:
 	Eshop() {};
+	~Eshop();
 	void ResizeList(int n) { List.resize(n); };
 	void SetListItem(int I_id, QString I_name, QString I_producer, int I_stock, float I_price) { List[I_id].Set(I_id, I_name, I_producer, I_stock, I_price); };
 	void SetListId(int id,int I_id) { List[id].SetId(I_id); };
@@ -74,14 +75,13 @@ class cvicenie9 : public QMainWindow
 
 public:
     cvicenie9(QWidget *parent = Q_NULLPTR);
-	//~cvicenie9() ;
+	~cvicenie9();
 
 private:
     Ui::cvicenie9Class ui;
 	Eshop* MojObchod = nullptr;
-	int* Inventar;
+	int* Inventar=nullptr;
 	Customer Zakaznik;
-	int* vysledky;
 	int* konvertor = nullptr;
 	int prekonvertuj(int n);
 	void UpravKatalog();
@@ -89,11 +89,11 @@ private slots:
 	void on_actionOpen_triggered();
 	void on_Meno_textChanged();
 	void on_Priezvisko_textChanged();
-	void on_VRozpocet_valueChanged();
+	void on_VRozpocet_valueChanged(double a);
 	void on_Vstup_clicked();
 	void on_Katalog_itemSelectionChanged();
 	void on_PridatKos_clicked();
-	void on_NakupKusy_valueChanged();
+	void on_NakupKusy_valueChanged(int a);
 	void on_Vyprazdnit_clicked();
 	void on_Produkt_textChanged();
 	void on_Vyrobca_textChanged();

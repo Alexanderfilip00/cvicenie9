@@ -168,7 +168,7 @@ void cvicenie9::on_Priezvisko_textChanged()
 	else ui.Vstup->setEnabled(false);
 }
 
-void cvicenie9::on_VRozpocet_valueChanged()
+void cvicenie9::on_VRozpocet_valueChanged(double a)
 {
 	if (ui.Priezvisko->text() != "" && ui.VRozpocet->value() != 0.0 && ui.Meno->text() != "") {
 		ui.Vstup->setEnabled(true);
@@ -222,13 +222,11 @@ void cvicenie9::on_Katalog_itemSelectionChanged()
 	ui.NakupCena->setValue(ui.NakupKusy->value() * MojObchod->GetListPrice(prekonvertuj(ui.Katalog->currentRow() +1)));
 }
 
-/*cvicenie9::~cvicenie9()
+cvicenie9::~cvicenie9()
 {
-	delete[] Inventar;
-	delete[] MojObchod;
-	delete[] vysledky;
-	delete[] konvertor;
-}*/
+	if (Inventar!=nullptr) delete[] Inventar;
+	if (konvertor != nullptr) delete[] konvertor;
+}
 
 int cvicenie9::prekonvertuj(int n) {
 	//qDebug() << "vstupne ID: " << n;
@@ -244,12 +242,19 @@ void cvicenie9::on_PridatKos_clicked()
 	}
 	else {
 		if (ui.NakupKusy->value() > MojObchod->GetListStock(id)) {			//test, ci je dost tovaru na sklade
-			qDebug() << "Nedostatok tovaru na sklade.";
+
+			QMessageBox msgBox;
+			msgBox.setText("Nedostatok tovaru na sklade.");
+			msgBox.exec();
+			//qDebug() << "Nedostatok tovaru na sklade.";
 
 		}
 
 		else if (ui.NakupCena->value() > Zakaznik.Budget()) {			//test, ci ma zakaznik dost penazi
 			qDebug() << "Nedostatocny rozpocet";
+			QMessageBox msgBox;
+			msgBox.setText("Nedostatocny rozpocet.");
+			msgBox.exec();
 		}
 		else {					//ak vsetko funguje
 			int i;
@@ -305,7 +310,7 @@ void cvicenie9::on_PridatKos_clicked()
 	
 }
 
-void cvicenie9::on_NakupKusy_valueChanged()
+void cvicenie9::on_NakupKusy_valueChanged(int a)
 {
 	ui.NakupCena->setValue(MojObchod->GetListPrice(prekonvertuj(ui.Katalog->currentRow() + 1)) * ui.NakupKusy->value());
 }
@@ -461,4 +466,10 @@ void Customer::SetupCart(int n) {
 	for (i = 0; i < n; i++) 
 		cart[i] = 0;
 
+}
+
+Eshop::~Eshop()
+{
+	
+	List.resize(0);
 }
